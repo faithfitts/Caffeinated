@@ -64,7 +64,7 @@ class CreatePost extends Component {
 
     return (
       <div>
-        <h3 style={{ marginTop: '30px', marginBottom: '-10px', fontSize: '40px' }}>Create Your Post!</h3>
+        <h2 style={{ marginTop: '30px', marginBottom: '-10px', fontSize: '40px' }}>Create Your Post!</h2>
         <PostForm
           post={post}
           handleChange={this.handleChange}

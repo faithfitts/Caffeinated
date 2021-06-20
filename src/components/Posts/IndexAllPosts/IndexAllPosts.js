@@ -3,16 +3,6 @@ import Card from 'react-bootstrap/Card'
 
 import { postIndexAll } from './../../../api/posts'
 
-// const cardContainerLayout = {
-//   display: 'inline-flex',
-//   justifyContent: 'center',
-//   flexFlow: 'row wrap',
-//   marginLeft: -600,
-//   marginRight: -600,
-//   marginTop: -150,
-//   padding: 200
-// }
-
 class PostIndexAll extends Component {
   constructor (props) {
     super(props)
@@ -50,12 +40,14 @@ class PostIndexAll extends Component {
 
     const postsJsx = posts.map(post => (
       <Card key={post._id} className='content-bg'>
-        <Card.Img src={post.imageURL} style={{ height: '18rem' }} />
-        <Card.Body>
-          <Card.Title style={{ fontSize: '33px' }}>{post.title}</Card.Title>
-          <Card.Text>{post.description}</Card.Text>
-          <Card.Link className='content-sm' href={`#posts/${post._id}`}> Click Here To Learn More!</Card.Link>
-        </Card.Body>
+        <Card.Link className='content-sm' href={`#posts/${post._id}`}>
+          <Card.Img src={post.imageURL} style={{ height: '18rem' }} />
+          <Card.Body>
+            <Card.Title style={{ fontSize: '33px' }}>{post.title}</Card.Title>
+            <Card.Text>{post.description}</Card.Text>
+          </Card.Body>
+        </Card.Link>
+
       </Card>
     ))
 

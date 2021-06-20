@@ -291,12 +291,14 @@ class PostShow extends Component {
       // Show this display if the current user IS the owner of the post
       showDisplay = (
         <div>
-          <h1 style={{ marginTop: '10px' }}>{post.title}</h1>
-          <img src={post.imageURL} width="300" height="300" />
-          <div className='content-bg' style={{ border: '1px solid black', borderRadius: '4px', margin: '10px', padding: '10px' }}>
-            <h6 style={{ whiteSpace: 'pre-wrap' }}>
-              {post.description}
-            </h6>
+          <h1 className='title'>{post.title}</h1>
+          <img className='image' src={post.imageURL} />
+          <Card key={post.description} className='description' style={{ whiteSpace: 'pre-wrap' }}>
+            <Card.Body>
+              <Card.Text>{post.description}</Card.Text>
+            </Card.Body>
+          </Card>
+          <div className='info' style={{ border: '1px solid black', margin: '10px', padding: '10px' }}>
             <h6 style={{ whiteSpace: 'pre-wrap' }}>
               {post.ingredients}
             </h6>

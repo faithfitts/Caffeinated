@@ -1,10 +1,125 @@
-$primary: #2e0854;
-$secondary: #be0000;
+$primary: #132a13;
+$secondary: #ff0000;
 
 @import '~bootstrap/scss/bootstrap';
 @import url('https://fonts.googleapis.com/css2?family=Amiri:ital@1&family=Philosopher&display=swap');
 
+body {
+  background: #fbf8f5;
+}
 
+// show post title
+.title {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+  margin-bottom: 40px;
+  font-size: 80px;
+}
+
+// show post image
+.image {
+  width: 400px;
+  height: 400px;
+  border: 2px solid #132a13;
+  border-radius: 50%;
+  display: block;
+  margin-left: 150px;
+  margin-right: auto;
+  margin-bottom: 50px;
+}
+
+// show post coffee description
+.description {
+  margin-left: 200px;
+  font-size: 20px;
+}
+
+// put image and description side-by-side
+.image, .description {
+  display: inline-block;
+}
+
+// unauthenticatedUser {
+//   background: url('https://i.imgur.com/LQs1Q3F.jpg') no-repeat center;
+//   background-size: cover;
+//    color: white;
+// }
+
+// .full-bg-size-component {
+//   /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+//     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+//
+//     /* Set a specific height */
+//     height: 100%;
+//
+//     /* Position and center the image to scale nicely on all screens */
+//     background-position: center;
+//     background-repeat: no-repeat;
+//     background-size: cover;
+//     position: relative;
+// }
+
+.jumbotron {
+  color: white;
+  background-image: url("https://i.imgur.com/LQs1Q3F.jpg");
+  // background-position: center;
+  // background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  position: fixed;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  height: 100vh;
+  // margin-top: -7vh;
+}
+
+.jumbotron1 {
+  color: white;
+  background-image: url("https://i.imgur.com/LQs1Q3F.jpg");
+  // background-position: center;
+  // background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  position: fixed;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  height: 100vh;
+  // margin-top: -7vh;
+}
+
+// Hero Page - Description
+.display-1 {
+  margin-top: 35px;
+  font-size: 30px;
+  margin-left: -50px;
+  text-align: center;
+}
+
+// Hero Page - Stay Caffeinated
+.display-2 {
+  font-size: 35px;
+  margin-top: 550px;
+  margin-left: 820px;
+}
+
+// Hero Page - Description
+.display-5 {
+  margin-top: -35px;
+  font-size: 30px;
+  margin-left: -50px;
+}
+
+// Hero Page - Stay Caffeinated
+.display-6 {
+  font-size: 35px;
+  margin-top: 500px;
+  margin-left: 820px;
+}
 
 // individual posts
 $content-bg: #f5efe7;
@@ -16,10 +131,11 @@ $content-bg: #f5efe7;
   // justify-content: space-between;
   max-width: 800px;
   // margin: 1rem auto;
+  color: black;
   padding: .5rem;
-  background: #ffffff;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
-  margin: 10px 20px;
+  background: #f5efe7;
+  box-shadow: 0 1px 4px #132a13 rgba(0, 0, 0, 0.4);
+  margin: 10px 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -27,8 +143,7 @@ $content-bg: #f5efe7;
 
 // Click Here Link
 .content-sm {
-  color: green;
-  text-decoration: underline;
+  color: black;
 }
 
 // all posts on the page
@@ -38,10 +153,12 @@ $content-bg: #f5efe7;
   // grid-auto-rows: 300px;
   // width: 100%;
   // padding: 1rem;
-  // background: #ffffff;
   // margin: 8px auto;
   // max-width: 500px;
-  margin: 1rem auto;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  margin-left: -7vw;
+  margin-right: -7vw;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
