@@ -2,9 +2,9 @@ import React, { Fragment } from 'react'
 import '../index.scss'
 
 const authenticatedUser = (
-  <div className="jumbotron1 jumbotron-fluid">
+  <div className="jumbotron jumbotron-fluid">
     <div className="container">
-      <h6 className="display-1">Welcome! Click <a href={'#index'}>HERE</a> to see the latest coffee creations!</h6>
+      <h6 className="intro"><a style={{ color: '#f5efe7' }} href={'#index'}>Welcome! Click here to see the latest coffee creations!</a></h6>
       <h6 className="display-2">~ Stay Caffeinated</h6>
     </div>
   </div>

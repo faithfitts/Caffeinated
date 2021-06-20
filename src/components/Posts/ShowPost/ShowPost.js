@@ -298,20 +298,23 @@ class PostShow extends Component {
               <Card.Text>{post.description}</Card.Text>
             </Card.Body>
           </Card>
-          <div className='info' style={{ border: '1px solid black', margin: '10px', padding: '10px' }}>
-            <h6 style={{ whiteSpace: 'pre-wrap' }}>
+          <div className='info' style={{ marginBottom: '15px', padding: '10px', borderStyle: 'groove', borderRadius: '10px' }}>
+            <div className='labels'>Ingredients</div>
+            <h6 className='labels__info'>
               {post.ingredients}
             </h6>
-            <h6 style={{ whiteSpace: 'pre-wrap' }}>
+            <div className='labels'>Instructions</div>
+            <h6 className='labels__info'>
               {post.instructions}
             </h6>
-            <h6 style={{ whiteSpace: 'pre-wrap' }}>
+            <div className='labels'>Notes</div>
+            <h6 className='labels__info'>
               {post.notes}
             </h6>
           </div>
           <Button onClick={this.updatePostClicked} variant="primary">Update</Button>
           <Button style={{ marginLeft: '10px' }} onClick={this.onPostDelete} variant="outline-danger">Delete</Button>
-          <h5 style={{ marginTop: '40px' }}>Comments:</h5>
+          <h4 style={{ marginTop: '50px', marginLeft: '45px' }}>Comments:</h4>
           <div className="showCommentContainer">
             <ul>
               {commentsJsx}

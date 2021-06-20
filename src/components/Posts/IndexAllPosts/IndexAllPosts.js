@@ -43,8 +43,8 @@ class PostIndexAll extends Component {
         <Card.Link className='content-sm' href={`#posts/${post._id}`}>
           <Card.Img src={post.imageURL} style={{ height: '18rem' }} />
           <Card.Body>
-            <Card.Title style={{ fontSize: '33px' }}>{post.title}</Card.Title>
-            <Card.Text>{post.description}</Card.Text>
+            <Card.Title style={{ marginBottom: '-5px', fontSize: '30px', textAlign: 'center' }}>{post.title}</Card.Title>
+            {/* <Card.Text>{post.description}</Card.Text> */}
           </Card.Body>
         </Card.Link>
 

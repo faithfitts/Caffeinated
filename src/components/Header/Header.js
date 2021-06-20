@@ -1,13 +1,12 @@
 import React, { Fragment } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
+import NavDropdown from 'react-bootstrap/NavDropdown'
 
 const authenticatedOptions = (
   <Fragment>
-    <Nav.Link href="#index">Explore!</Nav.Link>
-    <Nav.Link href="#create-post">Create A Post</Nav.Link>
-    <Nav.Link href="#change-password">Change Password</Nav.Link>
-    <Nav.Link href="#sign-out">Sign Out</Nav.Link>
+    <Nav.Link href="#index" style={{ paddingLeft: '30px', paddingRight: '20px' }}>Explore!</Nav.Link>
+    <Nav.Link href="#create-post" style={{ paddingRight: '30px' }}>Create Post</Nav.Link>
   </Fragment>
 )
 
@@ -26,7 +25,11 @@ const Header = ({ user }) => (
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="ml-auto">
-        { user && <span className="navbar-text mr-2">Welcome, {user.username}!</span>}
+        { user && <NavDropdown title={user.username} id="basic-nav-dropdown" className="dropdownitem">
+          <NavDropdown.Item className="dropdownitem" href="#change-password">Change Password</NavDropdown.Item>
+          <NavDropdown.Divider className="dropdownitem" />
+          <NavDropdown.Item className="dropdownitem" href="#sign-out">Sign Out</NavDropdown.Item>
+        </NavDropdown>}
         { user ? authenticatedOptions : unauthenticatedOptions }
       </Nav>
     </Navbar.Collapse>

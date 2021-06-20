@@ -6,6 +6,15 @@ $secondary: #ff0000;
 
 body {
   background: #fbf8f5;
+  font-family: 'Philosopher', sans-serif;
+}
+
+// Hero Page - Description
+.intro {
+  margin-top: -25px;
+  font-size: 30px;
+  margin-left: -50px;
+  text-align: center;
 }
 
 // show post title
@@ -21,7 +30,7 @@ body {
 .image {
   width: 400px;
   height: 400px;
-  border: 2px solid #132a13;
+  border: 2px solid $primary;
   border-radius: 50%;
   display: block;
   margin-left: 150px;
@@ -31,8 +40,13 @@ body {
 
 // show post coffee description
 .description {
-  margin-left: 200px;
+  margin-left: 100px;
   font-size: 20px;
+  position: absolute;
+  max-width: 500px;
+  box-shadow: 0 1px 4px $primary rgba(0, 0, 0, 0.4);
+  border: none;
+  background-color: inherit;
 }
 
 // put image and description side-by-side
@@ -40,25 +54,19 @@ body {
   display: inline-block;
 }
 
-// unauthenticatedUser {
-//   background: url('https://i.imgur.com/LQs1Q3F.jpg') no-repeat center;
-//   background-size: cover;
-//    color: white;
-// }
+.labels {
+  font-size: 30px;
+  padding: 10px;
+  font-weight: bold;
+  text-decoration: underline;
+}
 
-// .full-bg-size-component {
-//   /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
-//     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
-//
-//     /* Set a specific height */
-//     height: 100%;
-//
-//     /* Position and center the image to scale nicely on all screens */
-//     background-position: center;
-//     background-repeat: no-repeat;
-//     background-size: cover;
-//     position: relative;
-// }
+.labels__info {
+  white-space: pre-wrap;
+  margin-left: 30px;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
 
 .jumbotron {
   color: white;
@@ -74,30 +82,6 @@ body {
   margin-right: -50vw;
   height: 100vh;
   // margin-top: -7vh;
-}
-
-.jumbotron1 {
-  color: white;
-  background-image: url("https://i.imgur.com/LQs1Q3F.jpg");
-  // background-position: center;
-  // background-repeat: no-repeat;
-  background-size: cover;
-  width: 100vw;
-  position: fixed;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  height: 100vh;
-  // margin-top: -7vh;
-}
-
-// Hero Page - Description
-.display-1 {
-  margin-top: 35px;
-  font-size: 30px;
-  margin-left: -50px;
-  text-align: center;
 }
 
 // Hero Page - Stay Caffeinated
@@ -124,37 +108,26 @@ body {
 // individual posts
 $content-bg: #f5efe7;
 .content-bg {
-  // background-color: $content-bg;
-  // border: 2px solid purple;
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: space-between;
   max-width: 800px;
-  // margin: 1rem auto;
   color: black;
   padding: .5rem;
   background: #f5efe7;
-  box-shadow: 0 1px 4px #132a13 rgba(0, 0, 0, 0.4);
+  box-shadow: 0 1px 4px $primary rgba(0, 0, 0, 0.4);
   margin: 10px 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
 
-// Click Here Link
-.content-sm {
-  color: black;
+  word-break: break-word;
+ overflow: hidden;
+ text-overflow: ellipsis;
+
+ // line-height: 16px; /* fallback */
+ // max-height: 310px; /* fallback */
 }
 
 // all posts on the page
 .content-md {
-  // display: grid;
-  // grid-template-columns: repeat(5, 1fr);
-  // grid-auto-rows: 300px;
-  // width: 100%;
-  // padding: 1rem;
-  // margin: 8px auto;
-  // max-width: 500px;
   margin-top: 40px;
   margin-bottom: 40px;
   margin-left: -7vw;
@@ -162,16 +135,3 @@ $content-bg: #f5efe7;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
-
-body {
-  font-family: 'Philosopher', sans-serif;
-}
-
-// #card-body {
-//   font-family: 'Amiri', serif;
-//   text-align: center;
-//   font-size: 30px;
-//   margin: 10px;
-//   width: 1000px;
-//
-// }
