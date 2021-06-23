@@ -171,18 +171,18 @@ class PostShow extends Component {
     }
 
     const userId = user._id
-    // console.log(post)
     const ownerId = post.owner._id
 
     let showDisplay
 
+    // Comment Section
     if (!updateCommentClicked && !showUpdateCommentModal && userId !== ownerId) {
       const commentsJsx = commentsList.map(comment => (
-        <Card key={comment._id} className='content-bg' style={{ width: '100%', marginTop: '10px' }}>
+        <Card key={comment._id} className='posts-index-one' style={{ width: '100%', marginTop: '10px' }}>
           <Card.Body>
-            <Card.Text style={{ marginBottom: '30px', color: '#195839', fontSize: '14px', fontWeight: 'bold' }}>
+            <Card.Text style={{ marginBottom: '30px', color: '#006400', fontSize: '14px', fontWeight: 'bold' }}>
               <span>
-                {comment.owner.email} commented:
+                {comment.owner.username} commented:
               </span>
             </Card.Text>
             <br/>
@@ -198,7 +198,7 @@ class PostShow extends Component {
                   type="button"
                   onClick={(event) => this.handleUpdateClicked(comment._id, event)}
                 >
-                  Update
+                  Update Comment
                 </Button>
                 <Button
                   style={{ marginLeft: '10px' }}
@@ -219,22 +219,35 @@ class PostShow extends Component {
       // Show this display if the current user is NOT the owner of the post
       showDisplay = (
         <div>
-          <h3 style={{ marginTop: '10px' }} >{post.title}</h3>
-          <img src={post.imageURL} width="300" height="300" />
-          <div className='content-bg' style={{ border: '1px solid black', margin: '10px', padding: '10px' }}>
-            <h6 style={{ whiteSpace: 'pre-wrap' }}>
-              {post.description}
-            </h6>
-            <h6 style={{ whiteSpace: 'pre-wrap' }}>
+          {/* Title, Image, Creator, Description  */}
+          <h1 className='title'>{post.title}</h1>
+          <img className='image' src={post.imageURL} />
+          <Card key={post.description} className='description' style={{ whiteSpace: 'pre-wrap' }}>
+            <Card.Body>
+              <span style={{ fontSize: '25px', fontWeight: 'bold', color: '#006400' }}>
+                Creator: {post.owner.username}
+              </span>
+              <Card.Text>{post.description}</Card.Text>
+            </Card.Body>
+          </Card>
+
+          {/* Ingredients, Instructions, Notes */}
+          <div className='info' style={{ marginBottom: '15px', padding: '10px', borderStyle: 'groove', borderRadius: '10px' }}>
+            <div className='labels'>Ingredients</div>
+            <h6 className='labels__info'>
               {post.ingredients}
             </h6>
-            <h6 style={{ whiteSpace: 'pre-wrap' }}>
+            <div className='labels'>Instructions</div>
+            <h6 className='labels__info'>
               {post.instructions}
             </h6>
-            <h6 style={{ whiteSpace: 'pre-wrap' }}>
+            <div className='labels'>Notes</div>
+            <h6 className='labels__info'>
               {post.notes}
             </h6>
           </div>
+
+          {/* Comments Display */}
           <h5 style={{ marginTop: '40px' }}>Comments:</h5>
           <div className="showCommentContainer">
             <ul>
@@ -249,13 +262,15 @@ class PostShow extends Component {
           </div>
         </div>
       )
+
+      // Comments Display
     } else if (!updateCommentClicked && !showUpdateCommentModal && commentsList !== null) {
       const commentsJsx = commentsList.map(comment => (
-        <Card key={comment._id} className='content-bg' style={{ width: '100%', marginTop: '8px', padding: '5px' }}>
+        <Card key={comment._id} className='posts-index-one' style={{ width: '100%', marginTop: '8px', padding: '5px' }}>
           <Card.Body>
-            <Card.Text style={{ marginBottom: '20px', color: '#195839', fontSize: '14px', fontWeight: 'bold' }}>
+            <Card.Text style={{ marginBottom: '20px', color: '#006400', fontSize: '14px', fontWeight: 'bold' }}>
               <span>
-                {comment.owner.email} commented:
+                {comment.owner.username} commented:
               </span>
             </Card.Text>
             <br/>
@@ -271,7 +286,7 @@ class PostShow extends Component {
                   type="button"
                   onClick={(event) => this.handleUpdateClicked(comment._id, event)}
                 >
-                  Update
+                  Update Comment
                 </Button>
                 <Button
                   style={{ marginLeft: '10px' }}
@@ -291,13 +306,19 @@ class PostShow extends Component {
       // Show this display if the current user IS the owner of the post
       showDisplay = (
         <div>
+          {/* Title, Image, Creator, Description  */}
           <h1 className='title'>{post.title}</h1>
           <img className='image' src={post.imageURL} />
           <Card key={post.description} className='description' style={{ whiteSpace: 'pre-wrap' }}>
             <Card.Body>
+              <span style={{ fontSize: '25px', fontWeight: 'bold', color: '#006400' }}>
+                Creator: {post.owner.username}
+              </span>
               <Card.Text>{post.description}</Card.Text>
             </Card.Body>
           </Card>
+
+          {/* Ingredients, Instructions, Notes */}
           <div className='info' style={{ marginBottom: '15px', padding: '10px', borderStyle: 'groove', borderRadius: '10px' }}>
             <div className='labels'>Ingredients</div>
             <h6 className='labels__info'>
@@ -312,8 +333,12 @@ class PostShow extends Component {
               {post.notes}
             </h6>
           </div>
+
+          {/* Update and Delete Post Button */}
           <Button onClick={this.updatePostClicked} variant="primary">Update</Button>
           <Button style={{ marginLeft: '10px' }} onClick={this.onPostDelete} variant="outline-danger">Delete</Button>
+
+          {/* Comments Display */}
           <h4 style={{ marginTop: '50px', marginLeft: '45px' }}>Comments:</h4>
           <div className="showCommentContainer">
             <ul>
@@ -330,6 +355,7 @@ class PostShow extends Component {
       )
     }
 
+    // update comment (includes modal)
     if (showUpdateCommentModal) {
       return (
         <div>
@@ -339,7 +365,7 @@ class PostShow extends Component {
             backdrop="static"
             keyboard={false}
           >
-            <Modal.Header style={{ backgroundColor: '#2e0854' }} closeButton>
+            <Modal.Header style={{ backgroundColor: '#006400' }} closeButton>
               <Modal.Title style={{ color: 'white' }}>Update Your Comment!</Modal.Title>
             </Modal.Header>
             <Modal.Body style={{ backgroundColor: 'white' }}>

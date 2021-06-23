@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Card from 'react-bootstrap/Card'
+import './IndexAllPosts.css'
 
 import { postIndexAll } from './../../../api/posts'
 
@@ -39,12 +40,11 @@ class PostIndexAll extends Component {
     }
 
     const postsJsx = posts.map(post => (
-      <Card key={post._id} className='content-bg'>
-        <Card.Link className='content-sm' href={`#posts/${post._id}`}>
+      <Card key={post._id} className='posts-index-one'>
+        <Card.Link href={`#posts/${post._id}`}>
           <Card.Img src={post.imageURL} style={{ height: '18rem' }} />
           <Card.Body>
             <Card.Title style={{ marginBottom: '-5px', fontSize: '30px', textAlign: 'center' }}>{post.title}</Card.Title>
-            {/* <Card.Text>{post.description}</Card.Text> */}
           </Card.Body>
         </Card.Link>
 
@@ -52,8 +52,8 @@ class PostIndexAll extends Component {
     ))
 
     return (
-      <div className='content-md'>
-        { postsJsx }
+      <div className='posts-index-all'>
+        { postsJsx.reverse() }
       </div>
     )
   }

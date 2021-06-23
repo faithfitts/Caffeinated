@@ -9,14 +9,6 @@ body {
   font-family: 'Philosopher', sans-serif;
 }
 
-// Hero Page - Description
-.intro {
-  margin-top: -25px;
-  font-size: 30px;
-  margin-left: -50px;
-  text-align: center;
-}
-
 // show post title
 .title {
   display: flex;
@@ -44,16 +36,17 @@ body {
   font-size: 20px;
   position: absolute;
   max-width: 500px;
-  box-shadow: 0 1px 4px $primary rgba(0, 0, 0, 0.4);
+  // box-shadow: 0 1px 4px $primary rgba(0, 0, 0, 0.4);
   border: none;
   background-color: inherit;
 }
 
-// put image and description side-by-side
+// show post - put image and description side-by-side
 .image, .description {
   display: inline-block;
 }
 
+// Ingredients, Instructions, Notes Label
 .labels {
   font-size: 30px;
   padding: 10px;
@@ -61,77 +54,10 @@ body {
   text-decoration: underline;
 }
 
+// User Inputs for Labels
 .labels__info {
   white-space: pre-wrap;
   margin-left: 30px;
   font-size: 20px;
   margin-bottom: 20px;
-}
-
-.jumbotron {
-  color: white;
-  background-image: url("https://i.imgur.com/LQs1Q3F.jpg");
-  // background-position: center;
-  // background-repeat: no-repeat;
-  background-size: cover;
-  width: 100vw;
-  position: fixed;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  height: 100vh;
-  // margin-top: -7vh;
-}
-
-// Hero Page - Stay Caffeinated
-.display-2 {
-  font-size: 35px;
-  margin-top: 550px;
-  margin-left: 820px;
-}
-
-// Hero Page - Description
-.display-5 {
-  margin-top: -35px;
-  font-size: 30px;
-  margin-left: -50px;
-}
-
-// Hero Page - Stay Caffeinated
-.display-6 {
-  font-size: 35px;
-  margin-top: 500px;
-  margin-left: 820px;
-}
-
-// individual posts
-$content-bg: #f5efe7;
-.content-bg {
-  max-width: 800px;
-  color: black;
-  padding: .5rem;
-  background: #f5efe7;
-  box-shadow: 0 1px 4px $primary rgba(0, 0, 0, 0.4);
-  margin: 10px 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  word-break: break-word;
- overflow: hidden;
- text-overflow: ellipsis;
-
- // line-height: 16px; /* fallback */
- // max-height: 310px; /* fallback */
-}
-
-// all posts on the page
-.content-md {
-  margin-top: 40px;
-  margin-bottom: 40px;
-  margin-left: -7vw;
-  margin-right: -7vw;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
 }

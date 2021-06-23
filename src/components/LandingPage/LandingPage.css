@@ -1,0 +1,32 @@
+{/* Image */}
+.jumbotron {
+  color: white;
+  background-image: url("https://i.imgur.com/LQs1Q3F.jpg");
+  background-size: cover;
+  width: 100vw;
+  position: fixed;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  height: 100vh;
+}
+
+.auth-intro {
+  margin-top: -25px;
+  font-size: 30px;
+  margin-left: -50px;
+  text-align: center;
+}
+
+.unauth-intro {
+  margin-top: -35px;
+  font-size: 30px;
+  margin-left: -50px;
+}
+
+.slogan {
+  font-size: 35px;
+  margin-top: 550px;
+  margin-left: 820px;
+}

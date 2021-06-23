@@ -69,7 +69,7 @@ const PostForm = ({ post, handleSubmit, handleChange }) => (
       />
     </Form.Group>
 
-    <Button
+    <Button style={{ marginBottom: '30px' }}
       variant="primary"
       type="submit"
     >
