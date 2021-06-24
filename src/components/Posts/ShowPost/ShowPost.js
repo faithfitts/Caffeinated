@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import Card from 'react-bootstrap/Card'
 import CreateComment from './../../Comments/CreateComment/CreateComment'
+import ShowDisplay from './ShowDisplay'
 
 import { showPost, postDelete } from '../../../api/posts'
 import { commentDestroy, updateComment } from '../../../api/comments'
@@ -219,33 +220,9 @@ class PostShow extends Component {
       // Show this display if the current user is NOT the owner of the post
       showDisplay = (
         <div>
-          {/* Title, Image, Creator, Description  */}
-          <h1 className='title'>{post.title}</h1>
-          <img className='image' src={post.imageURL} />
-          <Card key={post.description} className='description' style={{ whiteSpace: 'pre-wrap' }}>
-            <Card.Body>
-              <span style={{ fontSize: '25px', fontWeight: 'bold', color: '#006400' }}>
-                Creator: {post.owner.username}
-              </span>
-              <Card.Text>{post.description}</Card.Text>
-            </Card.Body>
-          </Card>
-
-          {/* Ingredients, Instructions, Notes */}
-          <div className='info' style={{ marginBottom: '15px', padding: '10px', borderStyle: 'groove', borderRadius: '10px' }}>
-            <div className='labels'>Ingredients</div>
-            <h6 className='labels__info'>
-              {post.ingredients}
-            </h6>
-            <div className='labels'>Instructions</div>
-            <h6 className='labels__info'>
-              {post.instructions}
-            </h6>
-            <div className='labels'>Notes</div>
-            <h6 className='labels__info'>
-              {post.notes}
-            </h6>
-          </div>
+          <ShowDisplay
+            post={post}
+          />
 
           {/* Comments Display */}
           <h5 style={{ marginTop: '40px' }}>Comments:</h5>
@@ -306,33 +283,9 @@ class PostShow extends Component {
       // Show this display if the current user IS the owner of the post
       showDisplay = (
         <div>
-          {/* Title, Image, Creator, Description  */}
-          <h1 className='title'>{post.title}</h1>
-          <img className='image' src={post.imageURL} />
-          <Card key={post.description} className='description' style={{ whiteSpace: 'pre-wrap' }}>
-            <Card.Body>
-              <span style={{ fontSize: '25px', fontWeight: 'bold', color: '#006400' }}>
-                Creator: {post.owner.username}
-              </span>
-              <Card.Text>{post.description}</Card.Text>
-            </Card.Body>
-          </Card>
-
-          {/* Ingredients, Instructions, Notes */}
-          <div className='info' style={{ marginBottom: '15px', padding: '10px', borderStyle: 'groove', borderRadius: '10px' }}>
-            <div className='labels'>Ingredients</div>
-            <h6 className='labels__info'>
-              {post.ingredients}
-            </h6>
-            <div className='labels'>Instructions</div>
-            <h6 className='labels__info'>
-              {post.instructions}
-            </h6>
-            <div className='labels'>Notes</div>
-            <h6 className='labels__info'>
-              {post.notes}
-            </h6>
-          </div>
+          <ShowDisplay
+            post={post}
+          />
 
           {/* Update and Delete Post Button */}
           <Button onClick={this.updatePostClicked} variant="primary">Update</Button>
