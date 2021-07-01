@@ -1,20 +1,20 @@
 import React, { useState, Fragment } from 'react'
 import { withRouter } from 'react-router-dom'
-import { createComment } from '../../../api/comments'
+import { createReview } from '../../../api/reviews'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-const CreateComment = props => {
+const CreateReview = props => {
   const [content, setContent] = useState('')
 
   const handleChange = event => {
     event.persist()
-    setContent(prevComment => {
+    setContent(prevReview => {
       const updatedField = { [event.target.name]: event.target.value }
 
-      const editComment = Object.assign({}, prevComment, updatedField)
-      return editComment
+      const editReview = Object.assign({}, prevReview, updatedField)
+      return editReview
     })
   }
 
@@ -22,19 +22,19 @@ const CreateComment = props => {
     event.preventDefault()
     event.target.reset()
 
-    const { msgAlert, user, post, addNewComment } = props
+    const { msgAlert, user, post, addNewReview } = props
     const postId = post._id
 
     try {
-      const res = await createComment(content, user, postId)
-      await addNewComment(res.data.newComment)
+      const res = await createReview(content, user, postId)
+      await addNewReview(res.data.newReview)
       msgAlert({
-        heading: 'Comment Created!',
+        heading: 'Review Created!',
         variant: 'success'
       })
     } catch (error) {
       msgAlert({
-        heading: 'Failed to create comment',
+        heading: 'Failed to create review',
         message: `Failed because: ${error.message}`,
         variant: 'danger'
       })
@@ -44,14 +44,14 @@ const CreateComment = props => {
   return (
     <Fragment>
       <Form style={{ marginTop: '10px' }} onSubmit={handleSubmit}>
-        <Form.Group controlId="commentContent">
+        <Form.Group controlId="reviewContent">
           <Form.Control
             as="textarea"
             multiline="true"
             rows={3}
             columns={3}
             name="content"
-            placeholder="Comment Here"
+            placeholder="Add a review here"
             onChange={handleChange}
           />
         </Form.Group>
@@ -67,4 +67,4 @@ const CreateComment = props => {
   )
 }
 
-export default withRouter(CreateComment)
+export default withRouter(CreateReview)

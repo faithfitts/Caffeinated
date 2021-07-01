@@ -4,11 +4,11 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import Card from 'react-bootstrap/Card'
-import CreateComment from './../../Comments/CreateComment/CreateComment'
+import CreateReview from './../../Reviews/CreateReview/CreateReview'
 import ShowDisplay from './ShowDisplay'
 
 import { showPost, postDelete } from '../../../api/posts'
-import { commentDestroy, updateComment } from '../../../api/comments'
+import { reviewDestroy, updateReview } from '../../../api/reviews'
 import '../../../index.scss'
 
 class PostShow extends Component {
@@ -19,65 +19,65 @@ class PostShow extends Component {
       post: null,
       exists: true,
       deleted: false,
-      updateCommentClicked: false,
-      showUpdateCommentModal: false,
+      updateReviewClicked: false,
+      showUpdateReviewModal: false,
       updatePostButtonClicked: false,
-      commentId: null,
+      reviewId: null,
       content: null,
-      commentsList: []
+      reviewsList: []
     }
   }
 
-  deleteComment = (id, event) => {
+  deleteReview = (id, event) => {
     this.setState((state) => {
-      return { commentsList: state.commentsList.filter(cmnt => cmnt._id !== id) }
+      return { reviewsList: state.reviewsList.filter(cmnt => cmnt._id !== id) }
     })
   }
 
-  addNewComment = (comment) => {
+  addNewReview = (review) => {
     const { match, user } = this.props
     const { post } = this.state
 
-    post.comments.push(comment)
+    post.reviews.push(review)
 
     showPost(match.params.id, user)
-      .then(res => this.setState({ post: res.data.post, commentsList: res.data.post.comments }))
+      .then(res => this.setState({ post: res.data.post, reviewsList: res.data.post.reviews }))
   }
 
-  async commentDelete (commentId, event) {
+  async reviewDelete (reviewId, event) {
     const { user, msgAlert } = this.props
     const { post } = this.state
     const postId = post._id
 
     try {
-      await commentDestroy(commentId, postId, user)
-      await this.deleteComment(commentId, event)
+      await reviewDestroy(reviewId, postId, user)
+      await this.deleteReview(reviewId, event)
       this.setState({ deleted: true })
     } catch (error) {
       msgAlert({
-        heading: 'Comment Delete Failed',
+        heading: 'Review Delete Failed',
         message: `Couldn't Delete Because: ${error.message}`,
         variant: 'danger'
       })
     }
   }
 
-  handleUpdateClicked = (commentId, event) => {
-    this.setState({ updateCommentClicked: true })
-    this.setState({ commentId: commentId })
-    this.setState({ showUpdateCommentModal: true })
+  handleUpdateClicked = (reviewId, event) => {
+    this.setState({ updateReviewClicked: true })
+    this.setState({ reviewId: reviewId })
+    this.setState({ showUpdateReviewModal: true })
   }
 
   handleClose = (event) => {
-    this.setState({ showUpdateCommentModal: false })
-    this.setState({ updateCommentClicked: false })
+    this.setState({ showUpdateReviewModal: false })
+    this.setState({ updateReviewClicked: false })
   }
 
   updatePostClicked = (event) => {
     this.setState({ updatePostButtonClicked: true })
   }
 
-  async handleUpdate (commentIdForAxios, event) {
+  async handleUpdate (reviewIdForAxios, event) {
     event.preventDefault()
     event.target.reset()
 
@@ -86,20 +86,20 @@ class PostShow extends Component {
     const postId = post._id
 
     try {
-      await updateComment(content, user, postId, commentIdForAxios)
+      await updateReview(content, user, postId, reviewIdForAxios)
       const res = await showPost(match.params.id, user)
-      await this.setState({ post: res.data.post, commentsList: res.data.post.comments })
-      this.setState({ updateCommentClicked: false })
-      this.setState({ showUpdateCommentModal: false })
+      await this.setState({ post: res.data.post, reviewsList: res.data.post.reviews })
+      this.setState({ updateReviewClicked: false })
+      this.setState({ showUpdateReviewModal: false })
       this.setState({ updatePostButtonClicked: false })
       msgAlert({
-        heading: 'Updated Comment Successfully!',
-        message: 'Your comment has been updated',
+        heading: 'Updated Review Successfully!',
+        message: 'Your review has been updated',
         variant: 'success'
       })
     } catch (error) {
       msgAlert({
-        heading: 'Failed to update comment',
+        heading: 'Failed to update review',
         message: `Failed to update with error: ${error.message}`,
         variant: 'danger'
       })
@@ -140,7 +140,7 @@ class PostShow extends Component {
     showPost(match.params.id, user)
       .then(res => {
         // console.log(res)
-        this.setState({ post: res.data.post, commentsList: res.data.post.comments })
+        this.setState({ post: res.data.post, reviewsList: res.data.post.reviews })
         return res
       })
       .then(res => msgAlert({
@@ -158,7 +158,7 @@ class PostShow extends Component {
   }
 
   render () {
-    const { post, commentsList, commentId, updateCommentClicked, showUpdateCommentModal, updatePostButtonClicked } = this.state
+    const { post, reviewsList, reviewId, updateReviewClicked, showUpdateReviewModal, updatePostButtonClicked } = this.state
     const { msgAlert, user } = this.props
 
     if (!post) {
@@ -176,39 +176,39 @@ class PostShow extends Component {
 
     let showDisplay
 
-    // Comment Section
-    if (!updateCommentClicked && !showUpdateCommentModal && userId !== ownerId) {
-      const commentsJsx = commentsList.map(comment => (
-        <Card key={comment._id} className='posts-index-one' style={{ width: '100%', marginTop: '10px' }}>
+    // Review Section
+    if (!updateReviewClicked && !showUpdateReviewModal && userId !== ownerId) {
+      const reviewsJsx = reviewsList.map(review => (
+        <Card key={review._id} className='posts-index-one' style={{ width: '100%', marginTop: '10px' }}>
           <Card.Body>
             <Card.Text style={{ marginBottom: '30px', color: '#006400', fontSize: '14px', fontWeight: 'bold' }}>
               <span>
-                {comment.owner.username} commented:
+                {review.owner.username} reviewed:
               </span>
             </Card.Text>
             <br/>
             <div style={{ marginTop: '-40px', whiteSpace: 'pre-wrap' }}>
-              {comment.content}
+              {review.content}
             </div>
 
-            {/* If the current user is the owner of the comment, allow edit and delete */}
-            {comment.owner._id === user._id
+            {/* If the current user is the owner of the review, allow edit and delete */}
+            {review.owner._id === user._id
               ? <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Button
                   variant="outline-primary"
                   type="button"
-                  onClick={(event) => this.handleUpdateClicked(comment._id, event)}
+                  onClick={(event) => this.handleUpdateClicked(review._id, event)}
                 >
-                  Update Comment
+                  Update Review
                 </Button>
                 <Button
                   style={{ marginLeft: '10px' }}
                   variant='outline-danger'
                   type='button'
                   onClick={(event) => {
-                    this.commentDelete(comment._id, event.target)
+                    this.reviewDelete(review._id, event.target)
                   }}>
-                  Delete Comment
+                  Delete Review
                 </Button>
               </div>
               : null }
@@ -224,55 +224,55 @@ class PostShow extends Component {
             post={post}
           />
 
-          {/* Comments Display */}
-          <h5 style={{ marginTop: '40px' }}>Comments:</h5>
-          <div className="showCommentContainer">
+          {/* Reviews Display */}
+          <h5 style={{ marginTop: '40px' }}>Reviews:</h5>
+          <div className="showReviewContainer">
             <ul>
-              {commentsJsx}
-              <CreateComment
+              {reviewsJsx}
+              <CreateReview
                 user={user}
                 post={post}
                 msgAlert={msgAlert}
-                addNewComment={this.addNewComment}
+                addNewReview={this.addNewReview}
               />
             </ul>
           </div>
         </div>
       )
 
-      // Comments Display
-    } else if (!updateCommentClicked && !showUpdateCommentModal && commentsList !== null) {
-      const commentsJsx = commentsList.map(comment => (
-        <Card key={comment._id} className='posts-index-one' style={{ width: '100%', marginTop: '8px', padding: '5px' }}>
+      // Reviews Display
+    } else if (!updateReviewClicked && !showUpdateReviewModal && reviewsList !== null) {
+      const reviewsJsx = reviewsList.map(review => (
+        <Card key={review._id} className='posts-index-one' style={{ width: '100%', marginTop: '8px', padding: '5px' }}>
           <Card.Body>
             <Card.Text style={{ marginBottom: '20px', color: '#006400', fontSize: '14px', fontWeight: 'bold' }}>
               <span>
-                {comment.owner.username} commented:
+                {review.owner.username} reviewed:
               </span>
             </Card.Text>
             <br/>
             <div style={{ whiteSpace: 'pre-wrap', marginTop: '-30px', padding: '-20px' }}>
-              {comment.content}
+              {review.content}
             </div>
 
-            {/* If the current user is the owner of the comment, allow edit and delete */}
-            {comment.owner._id === user._id
+            {/* If the current user is the owner of the review, allow edit and delete */}
+            {review.owner._id === user._id
               ? <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Button
                   variant="outline-primary"
                   type="button"
-                  onClick={(event) => this.handleUpdateClicked(comment._id, event)}
+                  onClick={(event) => this.handleUpdateClicked(review._id, event)}
                 >
-                  Update Comment
+                  Update Review
                 </Button>
                 <Button
                   style={{ marginLeft: '10px' }}
                   variant='outline-danger'
                   type='button'
                   onClick={(event) => {
-                    this.commentDelete(comment._id, event.target)
+                    this.reviewDelete(review._id, event.target)
                   }}>
-                  Delete Comment
+                  Delete Review
                 </Button>
               </div>
               : null }
@@ -291,16 +291,16 @@ class PostShow extends Component {
           <Button onClick={this.updatePostClicked} variant="primary">Update</Button>
           <Button style={{ marginLeft: '10px' }} onClick={this.onPostDelete} variant="outline-danger">Delete</Button>
 
-          {/* Comments Display */}
-          <h4 style={{ marginTop: '50px', marginLeft: '45px' }}>Comments:</h4>
-          <div className="showCommentContainer">
+          {/* Reviews Display */}
+          <h4 style={{ marginTop: '50px', marginLeft: '45px' }}>Reviews:</h4>
+          <div className="showReviewContainer">
             <ul>
-              {commentsJsx}
-              <CreateComment
+              {reviewsJsx}
+              <CreateReview
                 user={user}
                 post={post}
                 msgAlert={msgAlert}
-                addNewComment={this.addNewComment}
+                addNewReview={this.addNewReview}
               />
             </ul>
           </div>
@@ -308,30 +308,30 @@ class PostShow extends Component {
       )
     }
 
-    // update comment (includes modal)
-    if (showUpdateCommentModal) {
+    // Update Review Modal
+    if (showUpdateReviewModal) {
       return (
         <div>
           <Modal
-            show={showUpdateCommentModal}
+            show={showUpdateReviewModal}
             onHide={this.handleClose}
             backdrop="static"
             keyboard={false}
           >
             <Modal.Header style={{ backgroundColor: '#006400' }} closeButton>
-              <Modal.Title style={{ color: 'white' }}>Update Your Comment!</Modal.Title>
+              <Modal.Title style={{ color: 'white' }}>Update Your Review!</Modal.Title>
             </Modal.Header>
             <Modal.Body style={{ backgroundColor: 'white' }}>
               <Form onSubmit={(event) => {
-                this.handleUpdate(commentId, event)
+                this.handleUpdate(reviewId, event)
               }}>
                 <Form.Group controlId="formBasicContent">
-                  <Form.Label style={{ fontSize: '25px' }}>Comment</Form.Label>
+                  <Form.Label style={{ fontSize: '25px' }}>Review</Form.Label>
                   <Form.Control
                     as="textarea"
                     rows={3}
                     name="content"
-                    placeholder="Update comment here"
+                    placeholder="Update review here"
                     onChange={this.handleChange}
                   />
                 </Form.Group>

@@ -16,7 +16,7 @@ class CreatePost extends Component {
         ingredients: '',
         instructions: '',
         notes: '',
-        comments: []
+        reviews: []
       },
       createId: null
     }

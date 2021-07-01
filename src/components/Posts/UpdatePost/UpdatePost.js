@@ -16,7 +16,7 @@ class UpdatePost extends Component {
         ingredients: '',
         instructions: '',
         notes: '',
-        comments: []
+        reviews: []
       },
       createId: null,
       updated: false

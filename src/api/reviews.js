@@ -2,15 +2,15 @@ import axios from 'axios'
 import apiUrl from '../apiConfig'
 
 // Create
-export const createComment = async (content, user, postId) => {
+export const createReview = async (content, user, postId) => {
   return axios({
-    url: apiUrl + '/comments',
+    url: apiUrl + '/reviews',
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${user.token}`
     },
     data: {
-      comment: {
+      review: {
         content: content.content,
         postId: postId
       }
@@ -19,15 +19,15 @@ export const createComment = async (content, user, postId) => {
 }
 
 // Update
-export const updateComment = async (content, user, postId, commentId) => {
+export const updateReview = async (content, user, postId, reviewId) => {
   return axios({
-    url: apiUrl + '/comments/' + commentId,
+    url: apiUrl + '/reviews/' + reviewId,
     method: 'PATCH',
     headers: {
       'Authorization': `Bearer ${user.token}`
     },
     data: {
-      comment: {
+      review: {
         content: content.content,
         postId: postId
       }
@@ -36,12 +36,12 @@ export const updateComment = async (content, user, postId, commentId) => {
 }
 
 // Delete
-export const commentDestroy = async (commentId, postId, user) => {
+export const reviewDestroy = async (reviewId, postId, user) => {
   return axios({
-    url: apiUrl + '/comments/' + commentId,
+    url: apiUrl + '/reviews/' + reviewId,
     method: 'DELETE',
     data: {
-      comment: {
+      review: {
         postId: postId
       }
     },
