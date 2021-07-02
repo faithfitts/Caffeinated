@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import Card from 'react-bootstrap/Card'
 import './IndexPosts.css'
 
-import { postIndexAll } from './../../../api/posts'
+import { postIndexUser } from './../../../api/posts'
 
-class PostIndexAll extends Component {
+class PostIndexUser extends Component {
   constructor (props) {
     super(props)
 
@@ -16,19 +16,19 @@ class PostIndexAll extends Component {
   componentDidMount () {
     const { msgAlert, user } = this.props
 
-    postIndexAll(user)
+    postIndexUser(user)
       .then(res => {
         this.setState({ posts: res.data.post })
       })
       .then(() => msgAlert({
-        heading: 'Welcome To The Home Page',
+        heading: 'Now Viewing Your Coffee Creations',
         message: 'Click A Creation To See Details',
         variant: 'success'
       }))
       .catch(error => {
         msgAlert({
-          heading: 'Failed To Load Coffee Creations',
-          message: `Could Not Load Posts: ${error.message}`,
+          heading: 'Failed To Load Your Coffee Creations',
+          message: `Could Not Load Your Coffee Creations: ${error.message}`,
           variant: 'danger'
         })
       })
@@ -59,4 +59,4 @@ class PostIndexAll extends Component {
   }
 }
 
-export default PostIndexAll
+export default PostIndexUser

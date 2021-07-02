@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Redirect, withRouter } from 'react-router-dom'
-import PostForm from '../PostForm/PostForm'
+import PostFormUpdate from '../PostForms/PostFormUpdate'
 
-import { updatePost, showPost } from '../../../api/posts'
+import { updatePost } from '../../../api/posts'
 
 class UpdatePost extends Component {
   constructor (props) {
@@ -11,7 +11,7 @@ class UpdatePost extends Component {
     this.state = {
       post: {
         title: '',
-        imageURL: '',
+        imageURL: 'https://i.imgur.com/xcaVXzQ.png',
         description: '',
         ingredients: '',
         instructions: '',
@@ -31,28 +31,6 @@ class UpdatePost extends Component {
         post: { ...state.post, [event.target.name]: event.target.value }
       }
     })
-  }
-
-  componentDidMount () {
-    const { user, match, msgAlert } = this.props
-
-    const id = match.params.id
-    showPost(id, user)
-      .then(res => this.setState({ post: res.data.post }))
-      .then(() => {
-        msgAlert({
-          heading: 'Show Success',
-          message: 'Edit Post',
-          variant: 'success'
-        })
-      })
-      .catch(error => {
-        msgAlert({
-          heading: 'Show Failed',
-          message: `Couldn't Show Because: ${error.message}`,
-          variant: 'danger'
-        })
-      })
   }
 
   handleSubmit = event => {
@@ -90,7 +68,7 @@ class UpdatePost extends Component {
     return (
       <div>
         <h2 style={{ marginTop: '30px', marginBottom: '-10px', fontSize: '40px' }}>Update Your Post!</h2>
-        <PostForm
+        <PostFormUpdate
           post={post}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}

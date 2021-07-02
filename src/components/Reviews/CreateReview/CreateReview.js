@@ -30,6 +30,7 @@ const CreateReview = props => {
       await addNewReview(res.data.newReview)
       msgAlert({
         heading: 'Review Created!',
+        message: 'Thank You For Leaving A Review!',
         variant: 'success'
       })
     } catch (error) {

@@ -13,6 +13,17 @@ export const createPost = (post, user) => {
   })
 }
 
+// Index User (Show Creations made by current user)
+export const postIndexUser = user => {
+  return axios({
+    url: apiUrl + '/posts/user',
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${user.token}`
+    }
+  })
+}
+
 // Index All (Show All Creations)
 export const postIndexAll = user => {
   return axios({

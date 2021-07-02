@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
-import PostForm from '../PostForm/PostForm'
+import PostFormCreate from '../PostForms/PostFormCreate'
 
 import { createPost } from '../../../api/posts'
 
@@ -11,7 +11,7 @@ class CreatePost extends Component {
     this.state = {
       post: {
         title: '',
-        imageURL: '',
+        imageURL: 'https://i.imgur.com/xcaVXzQ.png',
         description: '',
         ingredients: '',
         instructions: '',
@@ -45,8 +45,8 @@ class CreatePost extends Component {
         return res
       })
       .then(res => msgAlert({
-        heading: 'Created Post Successfully',
-        message: `Successfully Created ${res.data.post.title}`,
+        heading: 'Post Created Successfully',
+        message: `Thank You For Posting: ${res.data.post.title}`,
         variant: 'success'
       }))
       .catch(error => msgAlert({
@@ -65,7 +65,7 @@ class CreatePost extends Component {
     return (
       <div>
         <h2 style={{ marginTop: '30px', marginBottom: '-10px', fontSize: '40px' }}>Create Your Post!</h2>
-        <PostForm
+        <PostFormCreate
           post={post}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}

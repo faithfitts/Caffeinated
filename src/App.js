@@ -16,6 +16,7 @@ import ChangePassword from './components/Authentication/ChangePassword/ChangePas
 // import post components
 import CreatePost from './components/Posts/CreatePost/CreatePost'
 import PostIndexAll from './components/Posts/IndexAllPosts/IndexAllPosts'
+import PostIndexUser from './components/Posts/IndexAllPosts/IndexUserPosts'
 import PostShow from './components/Posts/ShowPost/ShowPost'
 import UpdatePost from './components/Posts/UpdatePost/UpdatePost'
 
@@ -82,6 +83,9 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/index' render={() => (
             <PostIndexAll msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/index-user' render={() => (
+            <PostIndexUser msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/posts/:id' render={() => (
             <PostShow msgAlert={this.msgAlert} user={user} />

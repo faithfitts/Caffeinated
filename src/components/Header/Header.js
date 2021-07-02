@@ -26,8 +26,16 @@ const Header = ({ user }) => (
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="ml-auto">
         { user && <NavDropdown title={user.username} id="basic-nav-dropdown" className="dropdownitem">
+
+          {/* My Post Link in dropdown menu */}
+          <NavDropdown.Item className="dropdownitem" href="#index-user">My Creations</NavDropdown.Item>
+          <NavDropdown.Divider className="dropdownitem" />
+
+          {/* Change Password Link in dropdown menu */}
           <NavDropdown.Item className="dropdownitem" href="#change-password">Change Password</NavDropdown.Item>
           <NavDropdown.Divider className="dropdownitem" />
+
+          {/* Sign Out Link in dropdown menu */}
           <NavDropdown.Item className="dropdownitem" href="#sign-out">Sign Out</NavDropdown.Item>
         </NavDropdown>}
         { user ? authenticatedOptions : unauthenticatedOptions }

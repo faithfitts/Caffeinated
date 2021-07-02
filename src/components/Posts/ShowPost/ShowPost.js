@@ -56,7 +56,7 @@ class PostShow extends Component {
     } catch (error) {
       msgAlert({
         heading: 'Review Delete Failed',
-        message: `Couldn't Delete Because: ${error.message}`,
+        message: `Unable To Delete Review: ${error.message}`,
         variant: 'danger'
       })
     }
@@ -93,14 +93,14 @@ class PostShow extends Component {
       this.setState({ showUpdateReviewModal: false })
       this.setState({ updatePostButtonClicked: false })
       msgAlert({
-        heading: 'Updated Review Successfully!',
-        message: 'Your review has been updated',
+        heading: 'Review Update Successful',
+        message: 'Your Review Has Been Updated',
         variant: 'success'
       })
     } catch (error) {
       msgAlert({
-        heading: 'Failed to update review',
-        message: `Failed to update with error: ${error.message}`,
+        heading: 'Failed To Update Review',
+        message: `Failed To Update Refview With Error: ${error.message}`,
         variant: 'danger'
       })
     }
@@ -120,15 +120,15 @@ class PostShow extends Component {
     postDelete(match.params.id, user)
       .then(this.setState({ exists: false }))
       .then(() => msgAlert({
-        heading: 'Deleted Post Successfully!!!!',
-        message: 'The post has been deleted.',
+        heading: 'Deleted Post Successfully',
+        message: 'The Coffee Creation Has Been Deleted.',
         variant: 'success'
       }))
       .then(() => history.push('/index'))
       .catch(error => {
         msgAlert({
           heading: 'Deleting Post Failed',
-          message: `Failed to delete post with error: ${error.message}`,
+          message: `Failed To Delete Coffee Creation: ${error.message}`,
           variant: 'danger'
         })
       })
@@ -144,14 +144,14 @@ class PostShow extends Component {
         return res
       })
       .then(res => msgAlert({
-        heading: 'Here is your Creation',
-        message: `This is the ${res.data.post.title}`,
+        heading: `Now Viewing: ${res.data.post.title}`,
+        message: `Submitted By: ${res.data.post.owner.username}`,
         variant: 'success'
       }))
       .catch(error => {
         msgAlert({
-          heading: 'Showing Post Failed',
-          message: `Failed to show post with error: ${error.message}`,
+          heading: 'Coffee Creation Failed To Load',
+          message: `Failed To Show Post with error: ${error.message}`,
           variant: 'danger'
         })
       })
@@ -183,7 +183,7 @@ class PostShow extends Component {
           <Card.Body>
             <Card.Text style={{ marginBottom: '30px', color: '#006400', fontSize: '14px', fontWeight: 'bold' }}>
               <span>
-                {review.owner.username} reviewed:
+                {review.owner.username} said:
               </span>
             </Card.Text>
             <br/>
@@ -247,7 +247,7 @@ class PostShow extends Component {
           <Card.Body>
             <Card.Text style={{ marginBottom: '20px', color: '#006400', fontSize: '14px', fontWeight: 'bold' }}>
               <span>
-                {review.owner.username} reviewed:
+                {review.owner.username} said:
               </span>
             </Card.Text>
             <br/>
@@ -288,8 +288,8 @@ class PostShow extends Component {
           />
 
           {/* Update and Delete Post Button */}
-          <Button onClick={this.updatePostClicked} variant="primary">Update</Button>
-          <Button style={{ marginLeft: '10px' }} onClick={this.onPostDelete} variant="outline-danger">Delete</Button>
+          <Button onClick={this.updatePostClicked} variant="primary">Update Post</Button>
+          <Button style={{ marginLeft: '10px' }} onClick={this.onPostDelete} variant="outline-danger">Delete Post</Button>
 
           {/* Reviews Display */}
           <h4 style={{ marginTop: '50px', marginLeft: '45px' }}>Reviews:</h4>
