@@ -1,7 +1,7 @@
 import apiUrl from '../apiConfig'
 import axios from 'axios'
 
-// Create (Create a Creation)
+// Create A Creation
 export const createPost = (post, user) => {
   return axios({
     url: apiUrl + '/posts',
@@ -13,8 +13,8 @@ export const createPost = (post, user) => {
   })
 }
 
-// Index User (Show Creations made by current user)
-export const postIndexUser = user => {
+// Index User (Only Show Creations Made by Current User)
+export const indexUserPost = user => {
   return axios({
     url: apiUrl + '/posts/user',
     method: 'GET',
@@ -24,8 +24,8 @@ export const postIndexUser = user => {
   })
 }
 
-// Index All (Show All Creations)
-export const postIndexAll = user => {
+// Index All (Show All Creations by All Users)
+export const indexAllPost = user => {
   return axios({
     url: apiUrl + '/posts',
     method: 'GET',
@@ -35,7 +35,7 @@ export const postIndexAll = user => {
   })
 }
 
-// Show (Show one Creation)
+// Show A Creation
 export const showPost = (id, user) => {
   return axios({
     url: apiUrl + '/posts/' + id,
@@ -47,7 +47,7 @@ export const showPost = (id, user) => {
 }
 
 // Delete A Creation
-export const postDelete = (id, user) => {
+export const deletePost = (id, user) => {
   return axios({
     url: apiUrl + '/posts/' + id,
     method: 'DELETE',
@@ -57,7 +57,7 @@ export const postDelete = (id, user) => {
   })
 }
 
-// Update a Creation
+// Update A Creation
 export const updatePost = (id, post, user) => {
   return axios({
     url: apiUrl + '/posts/' + id,

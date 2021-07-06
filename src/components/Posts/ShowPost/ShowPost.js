@@ -7,8 +7,8 @@ import Card from 'react-bootstrap/Card'
 import CreateReview from './../../Reviews/CreateReview/CreateReview'
 import ShowDisplay from './ShowDisplay'
 
-import { showPost, postDelete } from '../../../api/posts'
-import { reviewDestroy, updateReview } from '../../../api/reviews'
+import { showPost, deletePost } from '../../../api/posts'
+import { deleteReview, updateReview } from '../../../api/reviews'
 import '../../../index.scss'
 
 class PostShow extends Component {
@@ -28,7 +28,8 @@ class PostShow extends Component {
     }
   }
 
-  deleteReview = (id, event) => {
+  // Logic for deleting a review
+  handleDeleteReview = (id, event) => {
     this.setState((state) => {
       return { reviewsList: state.reviewsList.filter(cmnt => cmnt._id !== id) }
     })
@@ -44,14 +45,17 @@ class PostShow extends Component {
       .then(res => this.setState({ post: res.data.post, reviewsList: res.data.post.reviews }))
   }
 
-  async reviewDelete (reviewId, event) {
+  // when Delete Review button is clicked
+  async handleDeleteReviewClicked (reviewId, event) {
     const { user, msgAlert } = this.props
     const { post } = this.state
     const postId = post._id
 
     try {
-      await reviewDestroy(reviewId, postId, user)
-      await this.deleteReview(reviewId, event)
+      // wait for Delete Review api call
+      await deleteReview(reviewId, postId, user)
+      // wait for logic for deleting a review
+      await this.handleDeleteReview(reviewId, event)
       this.setState({ deleted: true })
     } catch (error) {
       msgAlert({
@@ -117,7 +121,7 @@ class PostShow extends Component {
 
   onPostDelete = () => {
     const { user, match, history, msgAlert } = this.props
-    postDelete(match.params.id, user)
+    deletePost(match.params.id, user)
       .then(this.setState({ exists: false }))
       .then(() => msgAlert({
         heading: 'Deleted Post Successfully',
@@ -144,8 +148,8 @@ class PostShow extends Component {
         return res
       })
       .then(res => msgAlert({
-        heading: `Now Viewing: ${res.data.post.title}`,
-        message: `Submitted By: ${res.data.post.owner.username}`,
+        heading: 'Here Is Your Coffee Creation',
+        message: `Now Viewing: ${res.data.post.title}`,
         variant: 'success'
       }))
       .catch(error => {
@@ -206,7 +210,7 @@ class PostShow extends Component {
                   variant='outline-danger'
                   type='button'
                   onClick={(event) => {
-                    this.reviewDelete(review._id, event.target)
+                    this.handleDeleteReviewClicked(review._id, event.target)
                   }}>
                   Delete Review
                 </Button>
@@ -270,7 +274,7 @@ class PostShow extends Component {
                   variant='outline-danger'
                   type='button'
                   onClick={(event) => {
-                    this.reviewDelete(review._id, event.target)
+                    this.handleDeleteReviewClicked(review._id, event.target)
                   }}>
                   Delete Review
                 </Button>

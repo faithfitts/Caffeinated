@@ -1,7 +1,7 @@
 import axios from 'axios'
 import apiUrl from '../apiConfig'
 
-// Create
+// Create A Review
 export const createReview = async (content, user, postId) => {
   return axios({
     url: apiUrl + '/reviews',
@@ -18,7 +18,7 @@ export const createReview = async (content, user, postId) => {
   })
 }
 
-// Update
+// Update A Review
 export const updateReview = async (content, user, postId, reviewId) => {
   return axios({
     url: apiUrl + '/reviews/' + reviewId,
@@ -35,8 +35,8 @@ export const updateReview = async (content, user, postId, reviewId) => {
   })
 }
 
-// Delete
-export const reviewDestroy = async (reviewId, postId, user) => {
+// Delete A Review
+export const deleteReview = async (reviewId, postId, user) => {
   return axios({
     url: apiUrl + '/reviews/' + reviewId,
     method: 'DELETE',

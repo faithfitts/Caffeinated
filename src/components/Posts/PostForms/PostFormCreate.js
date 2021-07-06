@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button'
 
 const PostFormCreate = ({ post, handleSubmit, handleChange }) => (
   <Form onSubmit={handleSubmit}>
+    {/* Title */}
     <Form.Group controlId="formBasicTitle">
       <Form.Label style={{ marginTop: '30px', fontSize: '20px' }}>Title</Form.Label>
       <Form.Label style={{ fontSize: '15px', color: 'red' }}>&nbsp;&nbsp; *required</Form.Label>
@@ -13,11 +14,11 @@ const PostFormCreate = ({ post, handleSubmit, handleChange }) => (
         name="title"
         placeholder="Enter Name of Creation Here"
         oninvalid="this.setCustomValidity"
-        // onvalid="this.setCustomValidity('')"
         onChange={handleChange}
       />
     </Form.Group>
 
+    {/* Image */}
     <Form.Group controlId="formBasicPicture">
       <Form.Label style={{ marginBottom: '-20px', fontSize: '20px' }}>Image</Form.Label>
       <Form.Label style={{ fontSize: '15px', color: 'red' }}>&nbsp;&nbsp; *not required</Form.Label>
@@ -30,6 +31,7 @@ const PostFormCreate = ({ post, handleSubmit, handleChange }) => (
       />
     </Form.Group>
 
+    {/* Description */}
     <Form.Group controlId="formBasicDescription">
       <Form.Label style={{ marginBottom: '-20px', fontSize: '20px' }}>Description</Form.Label>
       <Form.Label style={{ fontSize: '15px', color: 'red' }}>&nbsp;&nbsp; *required</Form.Label>
@@ -44,6 +46,7 @@ const PostFormCreate = ({ post, handleSubmit, handleChange }) => (
       />
     </Form.Group>
 
+    {/* Ingredients */}
     <Form.Group controlId="formBasicIngredients">
       <Form.Label style={{ marginBottom: '-20px', fontSize: '20px' }}>Ingredients</Form.Label>
       <Form.Label style={{ fontSize: '15px', color: 'red' }}>&nbsp;&nbsp; *required</Form.Label>
@@ -58,6 +61,7 @@ const PostFormCreate = ({ post, handleSubmit, handleChange }) => (
       />
     </Form.Group>
 
+    {/* Instructions */}
     <Form.Group controlId="formBasicInstructions">
       <Form.Label style={{ marginBottom: '-20px', fontSize: '20px' }}>Instructions</Form.Label>
       <Form.Label style={{ fontSize: '15px', color: 'red' }}>&nbsp;&nbsp; *required</Form.Label>
@@ -72,6 +76,7 @@ const PostFormCreate = ({ post, handleSubmit, handleChange }) => (
       />
     </Form.Group>
 
+    {/* Notes */}
     <Form.Group controlId="formBasicNotes">
       <Form.Label style={{ marginBottom: '-20px', fontSize: '20px' }}>Notes</Form.Label>
       <Form.Label style={{ fontSize: '15px', color: 'red' }}>&nbsp;&nbsp; *not required</Form.Label>
@@ -84,6 +89,7 @@ const PostFormCreate = ({ post, handleSubmit, handleChange }) => (
       />
     </Form.Group>
 
+    {/* Submit Button */}
     <Button style={{ marginBottom: '30px' }}
       variant="primary"
       type="submit"

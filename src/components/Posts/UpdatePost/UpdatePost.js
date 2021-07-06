@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Redirect, withRouter } from 'react-router-dom'
 import PostFormUpdate from '../PostForms/PostFormUpdate'
 
-import { updatePost } from '../../../api/posts'
+import { showPost, updatePost } from '../../../api/posts'
 
 class UpdatePost extends Component {
   constructor (props) {
@@ -31,6 +31,15 @@ class UpdatePost extends Component {
         post: { ...state.post, [event.target.name]: event.target.value }
       }
     })
+  }
+
+  // Maintain reviews after post update
+  componentDidMount () {
+    const { user, match } = this.props
+    const id = match.params.id
+    showPost(id, user)
+      .then(res => this.setState({ post: res.data.post }))
+      .catch()
   }
 
   handleSubmit = event => {

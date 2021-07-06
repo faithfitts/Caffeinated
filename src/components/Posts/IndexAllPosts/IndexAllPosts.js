@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Card from 'react-bootstrap/Card'
 import './IndexPosts.css'
 
-import { postIndexAll } from './../../../api/posts'
+import { indexAllPost } from './../../../api/posts'
 
 class PostIndexAll extends Component {
   constructor (props) {
@@ -16,7 +16,8 @@ class PostIndexAll extends Component {
   componentDidMount () {
     const { msgAlert, user } = this.props
 
-    postIndexAll(user)
+    // make a request to get user posts & pass in user for the token
+    indexAllPost(user)
       .then(res => {
         this.setState({ posts: res.data.post })
       })
@@ -40,8 +41,13 @@ class PostIndexAll extends Component {
       return 'Loading...'
     }
 
+    // turn each post into a React Element (JSX)
+    // .map() returns a new array
+    // Loop through posts & render a post component for each one
     const postsJsx = posts.map(post => (
+      // Use unique identifier (the post's id) for key when iterating through an array
       <Card key={post._id} className='posts-index-one'>
+        {/* when clicking on card, link to show post */}
         <Card.Link href={`#posts/${post._id}`}>
           <Card.Img src={post.imageURL} style={{ height: '18rem' }} />
           <Card.Body>

@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button'
 
 const PostFormUpdate = ({ post, handleSubmit, handleChange }) => (
   <Form onSubmit={handleSubmit}>
+
+    {/* Title */}
     <Form.Group controlId="formBasicTitle">
       <Form.Label style={{ marginTop: '30px', fontSize: '20px' }}>Title</Form.Label>
       <Form.Control
@@ -14,6 +16,7 @@ const PostFormUpdate = ({ post, handleSubmit, handleChange }) => (
       />
     </Form.Group>
 
+    {/* Image */}
     <Form.Group controlId="formBasicPicture">
       <Form.Label style={{ marginBottom: '-20px', fontSize: '20px' }}>Image</Form.Label>
       <Form.Control
@@ -25,6 +28,7 @@ const PostFormUpdate = ({ post, handleSubmit, handleChange }) => (
       />
     </Form.Group>
 
+    {/* Description */}
     <Form.Group controlId="formBasicDescription">
       <Form.Label style={{ marginBottom: '-20px', fontSize: '20px' }}>Description</Form.Label>
       <Form.Control
@@ -36,6 +40,7 @@ const PostFormUpdate = ({ post, handleSubmit, handleChange }) => (
       />
     </Form.Group>
 
+    {/* Ingredients */}
     <Form.Group controlId="formBasicIngredients">
       <Form.Label style={{ marginBottom: '-20px', fontSize: '20px' }}>Ingredients</Form.Label>
       <Form.Control
@@ -47,6 +52,7 @@ const PostFormUpdate = ({ post, handleSubmit, handleChange }) => (
       />
     </Form.Group>
 
+    {/* Instructions */}
     <Form.Group controlId="formBasicInstructions">
       <Form.Label style={{ marginBottom: '-20px', fontSize: '20px' }}>Instructions</Form.Label>
       <Form.Control
@@ -58,6 +64,7 @@ const PostFormUpdate = ({ post, handleSubmit, handleChange }) => (
       />
     </Form.Group>
 
+    {/* Notes */}
     <Form.Group controlId="formBasicNotes">
       <Form.Label style={{ marginBottom: '-20px', fontSize: '20px' }}>Notes</Form.Label>
       <Form.Control
@@ -69,6 +76,7 @@ const PostFormUpdate = ({ post, handleSubmit, handleChange }) => (
       />
     </Form.Group>
 
+    {/* Submit Button */}
     <Button style={{ marginBottom: '30px' }}
       variant="primary"
       type="submit"
