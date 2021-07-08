@@ -8,26 +8,32 @@ import Button from 'react-bootstrap/Button'
 const CreateReview = props => {
   const [content, setContent] = useState('')
 
+  // Handle updateReview Logic
   const handleChange = event => {
+    // ensure the properties are not set to null after handleChange is finished
     event.persist()
+
     setContent(prevReview => {
       const updatedField = { [event.target.name]: event.target.value }
-
-      const editReview = Object.assign({}, prevReview, updatedField)
-      return editReview
+      const updatedReview = Object.assign({}, prevReview, updatedField)
+      return updatedReview
     })
   }
 
   async function handleSubmit (event) {
+    // prevent browser refresh
     event.preventDefault()
+    // clear new input field after creating a review
     event.target.reset()
 
-    const { msgAlert, user, post, addNewReview } = props
+    const { msgAlert, user, post, handleCreateReview } = props
     const postId = post._id
 
     try {
+      // wait for API call
       const res = await createReview(content, user, postId)
-      await addNewReview(res.data.newReview)
+      // Wait for logic for creating a new review
+      await handleCreateReview(res.data.newReview)
       msgAlert({
         heading: 'Review Created!',
         message: 'Thank You For Leaving A Review!',

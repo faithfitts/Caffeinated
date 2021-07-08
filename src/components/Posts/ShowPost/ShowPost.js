@@ -35,7 +35,8 @@ class PostShow extends Component {
     })
   }
 
-  addNewReview = (review) => {
+  // Logic for create a review
+  handleCreateReview = (review) => {
     const { match, user } = this.props
     const { post } = this.state
 
@@ -46,7 +47,7 @@ class PostShow extends Component {
   }
 
   // when Delete Review button is clicked
-  async handleDeleteReviewClicked (reviewId, event) {
+  async onDeleteReview (reviewId, event) {
     const { user, msgAlert } = this.props
     const { post } = this.state
     const postId = post._id
@@ -66,21 +67,25 @@ class PostShow extends Component {
     }
   }
 
+  // Logic to handle when review update button is clicked
   handleUpdateClicked = (reviewId, event) => {
     this.setState({ updateReviewClicked: true })
     this.setState({ reviewId: reviewId })
     this.setState({ showUpdateReviewModal: true })
   }
 
+  // Close Button on modal
   handleClose = (event) => {
     this.setState({ showUpdateReviewModal: false })
     this.setState({ updateReviewClicked: false })
   }
 
+  // Logic for Clicking Update Button for Post
   updatePostClicked = (event) => {
     this.setState({ updatePostButtonClicked: true })
   }
 
+  // Logic to handle Review Update
   async handleUpdate (reviewIdForAxios, event) {
     event.preventDefault()
     event.target.reset()
@@ -90,8 +95,11 @@ class PostShow extends Component {
     const postId = post._id
 
     try {
+      // wait for Review Update API call
       await updateReview(content, user, postId, reviewIdForAxios)
+      // wait for Show Post API call
       const res = await showPost(match.params.id, user)
+      // wait for the post data and the review array
       await this.setState({ post: res.data.post, reviewsList: res.data.post.reviews })
       this.setState({ updateReviewClicked: false })
       this.setState({ showUpdateReviewModal: false })
@@ -110,6 +118,7 @@ class PostShow extends Component {
     }
   }
 
+  // Logic to change of state for Update Review
   handleChange = event => {
     event.persist()
     this.setState((state) => {
@@ -119,6 +128,7 @@ class PostShow extends Component {
     })
   }
 
+  // Logic for Deleting Post
   onPostDelete = () => {
     const { user, match, history, msgAlert } = this.props
     deletePost(match.params.id, user)
@@ -138,6 +148,7 @@ class PostShow extends Component {
       })
   }
 
+  // Logic for ShowPost (viewing a single post)
   componentDidMount () {
     const { user, match, msgAlert } = this.props
 
@@ -165,10 +176,12 @@ class PostShow extends Component {
     const { post, reviewsList, reviewId, updateReviewClicked, showUpdateReviewModal, updatePostButtonClicked } = this.state
     const { msgAlert, user } = this.props
 
+    // Loading
     if (!post) {
       return 'Loading...'
     }
 
+    // Redirect to Update Post
     if (updatePostButtonClicked) {
       return (
         <Redirect to={`/update-post/${post._id}`}/>
@@ -210,7 +223,7 @@ class PostShow extends Component {
                   variant='outline-danger'
                   type='button'
                   onClick={(event) => {
-                    this.handleDeleteReviewClicked(review._id, event.target)
+                    this.onDeleteReview(review._id, event.target)
                   }}>
                   Delete Review
                 </Button>
@@ -237,7 +250,7 @@ class PostShow extends Component {
                 user={user}
                 post={post}
                 msgAlert={msgAlert}
-                addNewReview={this.addNewReview}
+                handleCreateReview={this.handleCreateReview}
               />
             </ul>
           </div>
@@ -274,7 +287,7 @@ class PostShow extends Component {
                   variant='outline-danger'
                   type='button'
                   onClick={(event) => {
-                    this.handleDeleteReviewClicked(review._id, event.target)
+                    this.onDeleteReview(review._id, event.target)
                   }}>
                   Delete Review
                 </Button>
@@ -304,7 +317,7 @@ class PostShow extends Component {
                 user={user}
                 post={post}
                 msgAlert={msgAlert}
-                addNewReview={this.addNewReview}
+                handleCreateReview={this.handleCreateReview}
               />
             </ul>
           </div>

@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button'
 
 const PostFormCreate = ({ post, handleSubmit, handleChange }) => (
   <Form onSubmit={handleSubmit}>
+
     {/* Title */}
     <Form.Group controlId="formBasicTitle">
       <Form.Label style={{ marginTop: '30px', fontSize: '20px' }}>Title</Form.Label>

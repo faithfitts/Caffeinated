@@ -24,8 +24,8 @@ class UpdatePost extends Component {
   }
 
   handleChange = event => {
+    // ensure the properties are not set to null after handleChange is finished
     event.persist()
-
     this.setState((state) => {
       return {
         post: { ...state.post, [event.target.name]: event.target.value }
@@ -37,6 +37,8 @@ class UpdatePost extends Component {
   componentDidMount () {
     const { user, match } = this.props
     const id = match.params.id
+
+    // API call to Show Post
     showPost(id, user)
       .then(res => this.setState({ post: res.data.post }))
       .catch()
@@ -47,9 +49,9 @@ class UpdatePost extends Component {
 
     const { user, match, msgAlert } = this.props
     const { post } = this.state
-
     const id = match.params.id
 
+    // API call to Update Post
     updatePost(id, post, user)
       .then(res => {
         this.setState({ updated: true })

@@ -16,7 +16,7 @@ class PostIndexAll extends Component {
   componentDidMount () {
     const { msgAlert, user } = this.props
 
-    // make a request to get user posts & pass in user for the token
+    // make a request to get posts & pass in user for the token
     indexAllPost(user)
       .then(res => {
         this.setState({ posts: res.data.post })

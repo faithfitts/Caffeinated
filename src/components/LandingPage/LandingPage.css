@@ -12,6 +12,7 @@
   height: 100vh;
 }
 
+{/* Welcome Link when logged in */}
 .auth-intro {
   margin-top: -25px;
   font-size: 30px;
@@ -19,12 +20,14 @@
   text-align: center;
 }
 
+{/* Join the community heading when not logged in */}
 .unauth-intro {
   margin-top: -35px;
   font-size: 30px;
   margin-left: -50px;
 }
 
+{/* Stay Caffeinated Slogan */}
 .slogan {
   font-size: 35px;
   margin-top: 550px;

@@ -1,6 +1,7 @@
 import apiUrl from '../apiConfig'
 import axios from 'axios'
 
+// SignUp
 export const signUp = credentials => {
   return axios({
     method: 'POST',
@@ -16,6 +17,7 @@ export const signUp = credentials => {
   })
 }
 
+// SignIn
 export const signIn = credentials => {
   return axios({
     url: apiUrl + '/sign-in',
@@ -29,6 +31,7 @@ export const signIn = credentials => {
   })
 }
 
+// ChangePassword
 export const signOut = user => {
   return axios({
     url: apiUrl + '/sign-out',
@@ -39,6 +42,7 @@ export const signOut = user => {
   })
 }
 
+// SignOut
 export const changePassword = (passwords, user) => {
   return axios({
     url: apiUrl + '/change-password',
