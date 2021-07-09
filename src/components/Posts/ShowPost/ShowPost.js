@@ -28,14 +28,56 @@ class PostShow extends Component {
     }
   }
 
-  // Logic for deleting a review
-  handleDeleteReview = (id, event) => {
-    this.setState((state) => {
-      return { reviewsList: state.reviewsList.filter(cmnt => cmnt._id !== id) }
-    })
+  // Show Post - Logic (viewing a single post)
+  componentDidMount () {
+    const { user, match, msgAlert } = this.props
+
+    showPost(match.params.id, user)
+      .then(res => {
+        // console.log(res)
+        this.setState({ post: res.data.post, reviewsList: res.data.post.reviews })
+        return res
+      })
+      .then(res => msgAlert({
+        heading: 'Here Is Your Coffee Creation',
+        message: `Now Viewing: ${res.data.post.title}`,
+        variant: 'success'
+      }))
+      .catch(error => {
+        msgAlert({
+          heading: 'Coffee Creation Failed To Load',
+          message: `Failed To Show Post with error: ${error.message}`,
+          variant: 'danger'
+        })
+      })
   }
 
-  // Logic for create a review
+  // Update Post - Clicking the Update Button Logic
+  updatePostClicked = (event) => {
+    this.setState({ updatePostButtonClicked: true })
+  }
+
+  // Deleting Post - Logic
+  onPostDelete = () => {
+    const { user, match, history, msgAlert } = this.props
+    deletePost(match.params.id, user)
+      .then(this.setState({ exists: false }))
+      .then(() => msgAlert({
+        heading: 'Deleted Post Successfully',
+        message: 'The Coffee Creation Has Been Deleted.',
+        variant: 'success'
+      }))
+      .then(() => history.push('/index'))
+      .catch(error => {
+        msgAlert({
+          heading: 'Deleting Post Failed',
+          message: `Failed To Delete Coffee Creation: ${error.message}`,
+          variant: 'danger'
+        })
+      })
+  }
+
+  // Create Review - Logic
   handleCreateReview = (review) => {
     const { match, user } = this.props
     const { post } = this.state
@@ -46,48 +88,28 @@ class PostShow extends Component {
       .then(res => this.setState({ post: res.data.post, reviewsList: res.data.post.reviews }))
   }
 
-  // when Delete Review button is clicked
-  async onDeleteReview (reviewId, event) {
-    const { user, msgAlert } = this.props
-    const { post } = this.state
-    const postId = post._id
-
-    try {
-      // wait for Delete Review api call
-      await deleteReview(reviewId, postId, user)
-      // wait for logic for deleting a review
-      await this.handleDeleteReview(reviewId, event)
-      this.setState({ deleted: true })
-    } catch (error) {
-      msgAlert({
-        heading: 'Review Delete Failed',
-        message: `Unable To Delete Review: ${error.message}`,
-        variant: 'danger'
-      })
-    }
+  // Update Review - Logic for Changing State
+  handleChange = event => {
+    event.persist()
+    this.setState((state) => {
+      return {
+        content: { ...state.content, [event.target.name]: event.target.value }
+      }
+    })
   }
 
-  // Logic to handle when review update button is clicked
+  // Update Review - Clicking the Update Review Button
   handleUpdateClicked = (reviewId, event) => {
     this.setState({ updateReviewClicked: true })
     this.setState({ reviewId: reviewId })
     this.setState({ showUpdateReviewModal: true })
   }
 
-  // Close Button on modal
-  handleClose = (event) => {
-    this.setState({ showUpdateReviewModal: false })
-    this.setState({ updateReviewClicked: false })
-  }
-
-  // Logic for Clicking Update Button for Post
-  updatePostClicked = (event) => {
-    this.setState({ updatePostButtonClicked: true })
-  }
-
-  // Logic to handle Review Update
+  // Update Review - Logic to handle asynchronous calls
   async handleUpdate (reviewIdForAxios, event) {
+    // prevent browser refresh
     event.preventDefault()
+    // clear new input field after creating a review
     event.target.reset()
 
     const { msgAlert, user, match } = this.props
@@ -118,58 +140,38 @@ class PostShow extends Component {
     }
   }
 
-  // Logic to change of state for Update Review
-  handleChange = event => {
-    event.persist()
+  // Update Review - Close Button on Modal
+  handleClose = (event) => {
+    this.setState({ showUpdateReviewModal: false })
+    this.setState({ updateReviewClicked: false })
+  }
+
+  // Delete Review - Logic
+  handleDeleteReview = (id, event) => {
     this.setState((state) => {
-      return {
-        content: { ...state.content, [event.target.name]: event.target.value }
-      }
+      return { reviewsList: state.reviewsList.filter(cmnt => cmnt._id !== id) }
     })
   }
 
-  // Logic for Deleting Post
-  onPostDelete = () => {
-    const { user, match, history, msgAlert } = this.props
-    deletePost(match.params.id, user)
-      .then(this.setState({ exists: false }))
-      .then(() => msgAlert({
-        heading: 'Deleted Post Successfully',
-        message: 'The Coffee Creation Has Been Deleted.',
-        variant: 'success'
-      }))
-      .then(() => history.push('/index'))
-      .catch(error => {
-        msgAlert({
-          heading: 'Deleting Post Failed',
-          message: `Failed To Delete Coffee Creation: ${error.message}`,
-          variant: 'danger'
-        })
-      })
-  }
+  // Delete Review - Clicking the Delete Review Button
+  async onDeleteReview (reviewId, event) {
+    const { user, msgAlert } = this.props
+    const { post } = this.state
+    const postId = post._id
 
-  // Logic for ShowPost (viewing a single post)
-  componentDidMount () {
-    const { user, match, msgAlert } = this.props
-
-    showPost(match.params.id, user)
-      .then(res => {
-        // console.log(res)
-        this.setState({ post: res.data.post, reviewsList: res.data.post.reviews })
-        return res
+    try {
+      // wait for Delete Review api call
+      await deleteReview(reviewId, postId, user)
+      // wait for logic for deleting a review
+      await this.handleDeleteReview(reviewId, event)
+      this.setState({ deleted: true })
+    } catch (error) {
+      msgAlert({
+        heading: 'Review Delete Failed',
+        message: `Unable To Delete Review: ${error.message}`,
+        variant: 'danger'
       })
-      .then(res => msgAlert({
-        heading: 'Here Is Your Coffee Creation',
-        message: `Now Viewing: ${res.data.post.title}`,
-        variant: 'success'
-      }))
-      .catch(error => {
-        msgAlert({
-          heading: 'Coffee Creation Failed To Load',
-          message: `Failed To Show Post with error: ${error.message}`,
-          variant: 'danger'
-        })
-      })
+    }
   }
 
   render () {
@@ -193,7 +195,7 @@ class PostShow extends Component {
 
     let showDisplay
 
-    // Review Section
+    // Reviews List - current user is NOT the owner of the post
     if (!updateReviewClicked && !showUpdateReviewModal && userId !== ownerId) {
       const reviewsJsx = reviewsList.map(review => (
         <Card key={review._id} className='posts-index-one' style={{ width: '100%', marginTop: '10px' }}>
@@ -257,7 +259,7 @@ class PostShow extends Component {
         </div>
       )
 
-      // Reviews Display
+      // Reviews List - current user IS the owner of the post
     } else if (!updateReviewClicked && !showUpdateReviewModal && reviewsList !== null) {
       const reviewsJsx = reviewsList.map(review => (
         <Card key={review._id} className='posts-index-one' style={{ width: '100%', marginTop: '8px', padding: '5px' }}>
@@ -325,7 +327,7 @@ class PostShow extends Component {
       )
     }
 
-    // Update Review Modal
+    // Update Review - Modal Form
     if (showUpdateReviewModal) {
       return (
         <div>
@@ -368,6 +370,7 @@ class PostShow extends Component {
       )
     }
 
+    // Return Show Display
     return (
       <div>
         {showDisplay}
